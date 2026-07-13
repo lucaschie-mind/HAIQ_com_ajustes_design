@@ -152,7 +152,7 @@ Output ONLY valid JSON, no markdown:
 }`;
 
   const res = await anthropic.messages.create({
-    model: "claude-sonnet-4-20250514", max_tokens: 3500,
+    model: "claude-sonnet-4-6", max_tokens: 3500,
     messages: [{ role: "user", content: prompt }],
   });
   const text = res.content[0].type === "text" ? res.content[0].text : "{}";
