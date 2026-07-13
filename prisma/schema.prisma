@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id                String    @id @default(uuid())
+  candidateName     String
+  candidateEmail    String
+  caseId            String
+  caseTitle         String
+  caseDomain        String
+  startedAt         DateTime  @default(now())
+  completedAt       DateTime?
+  durationSeconds   Int?
+  finalOutput       String?
+  postTestBlockA    Json?
+  postTestBlockB    Json?
+  postTestBlockC    Json?
+  postTestBlockD    Json?
+  postTestAvgA      Float?
+  postTestAvgB      Float?
+  postTestAvgC      Float?
+  postTestAvgD      Float?
+  logs              Log[]
+  evaluation        Evaluation?
+
+  @@index([candidateEmail])
+  @@index([caseId])
+  @@index([startedAt])
+}
+
+model Log {
+  id             Int      @id @default(autoincrement())
+  sessionId      String
+  sequenceNumber Int
+  role           String
+  content        String
+  createdAt      DateTime @default(now())
+  session        Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId, sequenceNumber])
+}
+
+model Evaluation {
+  id              String   @id @default(uuid())
+  sessionId       String   @unique
+  d1Score         Float?
+  d2Score         Float?
+  d3Score         Float?
+  d4Score         Float?
+  haiqScore       Float?
+  humanAgencyPct  Float?
+  aiAgencyPct     Float?
+  agencyClass     String?
+  d1Parecer       String?
+  d2Parecer       String?
+  d3Parecer       String?
+  d4Parecer       String?
+  contextNote     String?
+  hasGapD1        Boolean  @default(false)
+  hasGapD2        Boolean  @default(false)
+  hasGapD3        Boolean  @default(false)
+  hasGapD4        Boolean  @default(false)
+  gapLabels       String?
+  gapsJson        Json?
+  interviewQsJson Json?
+  evidenceD1      Json?
+  evidenceD2      Json?
+  evidenceD3      Json?
+  evidenceD4      Json?
+  evidenceAgency  Json?
+  evaluationPath  String?
+  evaluatedAt     DateTime @default(now())
+  session         Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
