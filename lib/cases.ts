@@ -20,7 +20,7 @@ Nos últimos oito meses, o volume de leads orgânicos caiu cerca de 35%. Não ho
 
 A diretora de marketing te chamou: "Preciso de alguém que me ajude a pensar sobre isso sem vícios. Não quero uma lista de táticas — quero entender o que está mudando no mundo que explica o que estamos vendo. E o que isso significa para como devemos pensar sobre geração de demanda daqui para frente."`,
     mission: {
-      diagnostico: "O que você acredita que está acontecendo e por quê — com a melhor fundamentação que conseguir construir em 30 minutos.",
+      diagnostico: "O que você acredita que está acontecendo e por quê.",
       oQueMuda: "Se sua hipótese estiver certa, o que isso implica para como a empresa deve pensar sobre geração de demanda?"
     },
     systemPrompt: `# SYSTEM PROMPT — HAI-Q Case MKTG-002
